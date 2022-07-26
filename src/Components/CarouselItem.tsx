@@ -1,13 +1,9 @@
 import React from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native';
 
-export interface ICustomImage {
-  uri?: string | undefined;
-}
-
 export interface ICarouselItem {
   title: string;
-  image: ICustomImage;
+  posterUrl: string | null;
 }
 
 interface ICarouselItemProps {
@@ -18,7 +14,10 @@ export const CarouselItem = (props: ICarouselItemProps) => {
   return (
     <View style={styles.container}>
       <Text>{props.value.title}</Text>
-      <Image source={props.value.image} style={styles.customImage} />
+      <Image
+        source={{uri: props.value.posterUrl ?? ''}}
+        style={styles.customImage}
+      />
     </View>
   );
 };

@@ -1,8 +1,9 @@
 import React from 'react';
-import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {Image, StyleSheet, TouchableOpacity, View} from 'react-native';
 import {HomeStackParamList} from '../Navigation/HomeStack';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {useNavigation} from '@react-navigation/native';
+import {CustomText as Text} from './CustomText';
 
 export interface ICarouselItem {
   id: number;
@@ -27,11 +28,11 @@ export const CarouselItem = (props: ICarouselItemProps) => {
     <View style={styles.container}>
       <TouchableOpacity
         onPress={() => navigation.navigate('DetailScreen', props.value)}>
-        <Text>{props.value.title}</Text>
         <Image
           source={{uri: props.value.posterUrl ?? ''}}
-          style={styles.customImage}
+          style={styles.image}
         />
+        <Text style={styles.text}>{props.value.title}</Text>
       </TouchableOpacity>
     </View>
   );
@@ -41,10 +42,16 @@ const styles = StyleSheet.create({
   container: {
     display: 'flex',
     flexDirection: 'column',
-    marginHorizontal: 5,
+    marginHorizontal: 10,
+    maxWidth: 100,
   },
-  customImage: {
-    width: 50,
-    height: 100,
+  image: {
+    resizeMode: 'contain',
+    width: 100,
+    height: 180,
+  },
+  text: {
+    textAlign: 'center',
+    fontWeight: 'bold',
   },
 });

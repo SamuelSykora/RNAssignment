@@ -1,7 +1,8 @@
 import React from 'react';
-import {Image, SafeAreaView, StyleSheet, Text, View} from 'react-native';
+import {Image, SafeAreaView, StyleSheet, View} from 'react-native';
 import {HomeStackParamList} from '../Navigation/HomeStack';
 import {RouteProp} from '@react-navigation/native';
+import {CustomText as Text} from '../Components/CustomText';
 
 interface IDetailScreenProps {
   route: RouteProp<HomeStackParamList, 'DetailScreen'>;
@@ -11,30 +12,42 @@ export const DetailScreen = (props: IDetailScreenProps) => {
   return (
     <SafeAreaView>
       <View style={styles.container}>
-        <Text style={styles.title}>{props.route.params.title}</Text>
-        <Image
-          source={{uri: props.route.params.posterUrl ?? ''}}
-          style={{height: 400, width: '100%'}}
-        />
+        <View style={styles.imageContainer}>
+          <Image
+            source={{uri: props.route.params.posterUrl ?? ''}}
+            style={styles.image}
+          />
+        </View>
         <View style={styles.infoContainer}>
           <View style={styles.timeRow}>
-            <Text style={{marginHorizontal: 10}}>
-              {props.route.params.year}
-            </Text>
+            <Text style={styles.label}>{props.route.params.year}</Text>
             {!!props.route.params.duration && (
-              <Text>{props.route.params.duration} min.</Text>
+              <Text style={[styles.label, styles.duration]}>
+                {props.route.params.duration} min.
+              </Text>
             )}
           </View>
           {props.route.params.genres.length !== 0 && (
-            <Text>Genres: {props.route.params.genres.join(', ')}</Text>
+            <Text>
+              <Text style={styles.label}>Genres:</Text>{' '}
+              {props.route.params.genres.join(', ')}
+            </Text>
           )}
           {!!props.route.params.director && (
-            <Text>Directed by: {props.route.params.director}</Text>
+            <Text>
+              <Text style={styles.label}>Directed by:</Text>{' '}
+              {props.route.params.director}
+            </Text>
           )}
           {!!props.route.params.actors && (
-            <Text>Starring: {props.route.params.actors}</Text>
+            <Text>
+              <Text style={styles.label}>Starring:</Text>{' '}
+              {props.route.params.actors}
+            </Text>
           )}
-          <Text>{props.route.params.plot}</Text>
+          <Text>
+            <Text style={styles.label}>Plot:</Text> {props.route.params.plot}
+          </Text>
         </View>
       </View>
     </SafeAreaView>
@@ -47,13 +60,27 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   infoContainer: {
-    maxWidth: '95%',
+    width: '90%',
   },
-  title: {
-    marginLeft: 25,
+  image: {
+    resizeMode: 'contain',
+    flex: 1,
+  },
+  imageContainer: {
+    width: '100%',
+    height: 400,
   },
   timeRow: {
     display: 'flex',
     flexDirection: 'row',
+    justifyContent: 'center',
+    marginVertical: 5,
+  },
+  label: {
+    fontWeight: 'bold',
+    color: 'black',
+  },
+  duration: {
+    marginLeft: 10,
   },
 });

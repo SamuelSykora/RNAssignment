@@ -1,6 +1,7 @@
 import React from 'react';
 import {CarouselItem, ICarouselItem} from './CarouselItem';
-import {ScrollView, StyleSheet, Text, View} from 'react-native';
+import {ScrollView, StyleSheet, View} from 'react-native';
+import {CustomText as Text} from './CustomText';
 
 export interface ICarousel {
   title: string;
@@ -14,7 +15,7 @@ interface ICarouselProps {
 export const Carousel = (props: ICarouselProps) => {
   return (
     <View style={styles.container}>
-      <Text>{props.value.title}</Text>
+      <Text style={styles.title}>{props.value.title}</Text>
       <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
         <View style={styles.itemsContainer}>
           {props.value.items.map((item, itemIndex) => (
@@ -35,5 +36,9 @@ const styles = StyleSheet.create({
   itemsContainer: {
     display: 'flex',
     flexDirection: 'row',
+  },
+  title: {
+    fontWeight: 'bold',
+    fontSize: 20,
   },
 });

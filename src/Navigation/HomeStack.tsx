@@ -14,8 +14,20 @@ const Stack = createStackNavigator<HomeStackParamList>();
 export const HomeStack = () => {
   return (
     <Stack.Navigator initialRouteName="HomeScreen">
-      <Stack.Screen name="HomeScreen" component={HomeScreen} />
-      <Stack.Screen name="DetailScreen" component={DetailScreen} />
+      <Stack.Screen
+        name="HomeScreen"
+        component={HomeScreen}
+        options={{title: 'Home Screen'}}
+      />
+      <Stack.Screen
+        name="DetailScreen"
+        component={DetailScreen}
+        options={data => {
+          return {
+            title: data.route.params.title,
+          };
+        }}
+      />
     </Stack.Navigator>
   );
 };

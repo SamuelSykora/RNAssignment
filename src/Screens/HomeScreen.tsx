@@ -17,7 +17,7 @@ export const HomeScreen = () => {
   }, []);
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.container}>
       <ScrollView>
         <View style={styles.carouselsContainer}>
           {carousels?.carousels?.map((item, carouselIndex) => (
@@ -30,8 +30,13 @@ export const HomeScreen = () => {
 };
 
 const styles = StyleSheet.create({
+  container: {
+    padding: 2,
+  },
   carouselsContainer: {
     display: 'flex',
     flexDirection: 'column',
+    marginBottom: 10,
+    marginHorizontal: 5,
   },
 });

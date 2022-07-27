@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {SafeAreaView, ScrollView, StyleSheet, View} from 'react-native';
 import {Carousel, ICarousel} from '../Components/Carousel';
-import {getData} from '../getData';
+import {getData} from '../API/getData';
 
 export interface ICarousels {
   carousels?: ICarousel[] | null;

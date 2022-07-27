@@ -1,4 +1,4 @@
-import {ICarousels} from './Screens/HomeScreen';
+import {ICarousels} from '../Screens/HomeScreen';
 
 export const getData = async () => {
   let result = null;
@@ -6,15 +6,15 @@ export const getData = async () => {
     const response = await fetch(
       'https://raw.githubusercontent.com/24i/smartapps-test/main/data.json',
     );
-    const parsedData = await response.json();
+    const parsedData = (await response.json()) as ICarousels;
     if (!parsedData?.carousels) {
-      result = parsedData as ICarousels;
+      result = parsedData;
     }
   } catch (e) {
     console.error('Fetching failed: ', e);
   }
   if (!result) {
-    result = require('./data.json') as ICarousels;
+    result = require('../data.json') as ICarousels;
   }
   return result;
 };

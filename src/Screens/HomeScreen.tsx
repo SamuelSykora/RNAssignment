@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import {SafeAreaView, ScrollView, StyleSheet, View} from 'react-native';
 import {Carousel, ICarousel} from '../Components/Carousel';
+import {getData} from '../getData';
 
-interface ICarousels {
+export interface ICarousels {
   carousels?: ICarousel[] | null;
 }
 
@@ -10,7 +11,9 @@ export const HomeScreen = () => {
   const [carousels, setCarousels] = useState<ICarousels>();
 
   useEffect(() => {
-    setCarousels(require('../data.json'));
+    (async () => {
+      setCarousels(await getData());
+    })();
   }, []);
 
   return (
